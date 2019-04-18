@@ -1,0 +1,7 @@
+[package]
+name = "hello-rust"
+version = "0.1.0"
+authors = ["Przemysław Piotrowski <przemyslaw.piotrowski@atteo.com>"]
+
+[dependencies]
+ferris-says = "0.1"
