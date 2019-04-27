@@ -1,0 +1,6 @@
+[package]
+name = "fahrenheit-to-celsius"
+version = "0.1.0"
+authors = ["Przemysław Piotrowski <przemyslaw.piotrowski@atteo.com>"]
+
+[dependencies]
