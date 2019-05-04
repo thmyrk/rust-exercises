@@ -18,10 +18,8 @@ fn duplicate_encode(word: &str) -> String {
         *count += 1;
     }
 
-    // store result in new String
-    let mut new_word = String::new();
-    for character in word.to_string().to_lowercase().chars() {
-        let new_character = match character_counts.get(&character) {
+    word.to_lowercase().chars().map(|character| {
+        match character_counts.get(&character) {
             Some(i) => {
                 match i {
                     1 => '(',
@@ -29,10 +27,8 @@ fn duplicate_encode(word: &str) -> String {
                 }
             },
             None => '-',
-        };
-        new_word.push(new_character);
-    }
-    new_word
+        }
+    }).collect()
 }
 
 #[test]
