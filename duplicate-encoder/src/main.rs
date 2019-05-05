@@ -14,27 +14,25 @@ fn duplicate_encode(word: &str) -> String {
 
     for character in word.to_lowercase().chars() {
         // update a key, guarding against the key possibly not being set
-        let count = character_counts.entry(character).or_insert(0);
-        *count += 1;
+        *character_counts.entry(character).or_insert(0) += 1;
     }
 
-    word.to_lowercase().chars().map(|character| {
-        match character_counts.get(&character) {
-            Some(i) => {
-                match i {
-                    1 => '(',
-                    _ => ')',
-                }
-            },
-            None => '-',
-        }
-    }).collect()
+    word.to_lowercase()
+        .chars()
+        .map(|character| {
+            let character = character_counts.get(&character).unwrap();
+            match character {
+                1 => '(',
+                _ => ')',
+            }
+        })
+        .collect()
 }
 
 #[test]
 fn run_tests() {
-  assert_eq!(duplicate_encode("din"),"(((");
-  assert_eq!(duplicate_encode("recede"),"()()()");
-  assert_eq!(duplicate_encode("Success"),")())())","should ignore case");
-  assert_eq!(duplicate_encode("(( @"),"))((");
+    assert_eq!(duplicate_encode("din"), "(((");
+    assert_eq!(duplicate_encode("recede"), "()()()");
+    assert_eq!(duplicate_encode("Success"), ")())())", "should ignore case");
+    assert_eq!(duplicate_encode("(( @"), "))((");
 }
