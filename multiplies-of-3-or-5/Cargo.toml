@@ -1,0 +1,7 @@
+[package]
+name = "multiplies-of-3-or-5"
+version = "0.1.0"
+authors = ["Przemysław Piotrowski <przemyslaw.piotrowski@atteo.com>"]
+edition = "2018"
+
+[dependencies]
