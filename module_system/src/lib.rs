@@ -1,32 +1,4 @@
-mod front_of_house {
-    fn toggle_customer_presence() {}
-
-    pub mod hosting {
-        pub fn add_to_waitlist() {
-            super::toggle_customer_presence();
-            seat_at_table();
-        }
-
-        fn seat_at_table() {}
-    }
-
-    pub mod serving {
-        pub fn take_order() {
-            call_waiter();
-        }
-
-        pub fn serve_order() {
-            call_waiter();
-        }
-
-        pub fn take_payment() {
-            call_waiter();
-            crate::front_of_house::toggle_customer_presence();
-        }
-
-        fn call_waiter() {}
-    }
-}
+mod front_of_house;
 
 mod back_of_house {
     pub struct Breakfast {
@@ -62,9 +34,13 @@ mod back_of_house {
     }
 }
 
+pub use crate::front_of_house::{hosting, serving};
+
 pub fn eat_at_restaurant() {
-    front_of_house::hosting::add_to_waitlist();
-    front_of_house::serving::take_order();
+    println!("Customer walks in");
+
+    hosting::add_to_waitlist();
+    serving::take_order();
 
     let meal = back_of_house::Breakfast::summer("Wheat");
     println!("Meal given is: {0}", meal.description());
@@ -73,6 +49,6 @@ pub fn eat_at_restaurant() {
     let appetizer2 = back_of_house::Appetizer::Salad;
     println!("Appetizers given are: {0} and {1}", appetizer1.name(), appetizer2.name());
 
-    front_of_house::serving::serve_order();
-    front_of_house::serving::take_payment();
+    serving::serve_order();
+    serving::take_payment();
 }
